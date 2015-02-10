@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="KKMapp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:KKMapp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="KKM app" VerticalAlignment="Top" FontSize="36"/>
+        <DatePicker x:Name="targetDatePicker" Header="Target date" Margin="10,75,10,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cardTypeComboBox" Header="Card type" Margin="10,150,10,0" VerticalAlignment="Top" SelectionChanged="cardTypeComboBox_SelectionChanged"/>
+        <TextBox x:Name="identityNumberTextBox" Header="Client ID /student card ID" Margin="10,225,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="cityCardNumberTextBox" Header="City card number (longer one, right bottom corner)" Margin="10,300,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+
+        
+        
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar IsSticky="True" IsOpen="true">
+            <AppBarButton Label="Check tickets" Click="AppBarButton_Click">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Accept" ToolTipService.ToolTip="Check tickets"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+
+</Page>
