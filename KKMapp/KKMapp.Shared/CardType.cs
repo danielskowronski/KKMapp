@@ -33,6 +33,7 @@ namespace KKMapp
     {
         public async void loadCardTypes()
         {
+            cardTypeComboBox.SelectionChanged -= cardTypeComboBox_SelectionChanged;
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Data/" + "CardTypes.csv"));
             using (Stream stream = (await file.OpenReadAsync()).AsStreamForRead())
             {
@@ -46,19 +47,7 @@ namespace KKMapp
                     cardTypeComboBox.Items.Add(tmp);
                 }
             }
-
-        }
-        private void cardTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            CardType sel = (CardType)(cardTypeComboBox.SelectedItem);
-            if (sel.getType() != "0")
-            {
-                cityCardNumberTextBox.IsEnabled = false; cityCardNumberTextBox.Text = "not needed";
-            }
-            else
-            {
-                cityCardNumberTextBox.IsEnabled = true; cityCardNumberTextBox.Text = "";
-            }
+            cardTypeComboBox.SelectionChanged += cardTypeComboBox_SelectionChanged;
         }
     }
 }

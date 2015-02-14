@@ -9,21 +9,27 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="KKM app" VerticalAlignment="Top" FontSize="36"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="KKM app - check tickets" VerticalAlignment="Top" FontSize="36"/>
         <DatePicker x:Name="targetDatePicker" Header="Target date" Margin="10,75,10,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cardTypeComboBox" Header="Card type" Margin="10,150,10,0" VerticalAlignment="Top" SelectionChanged="cardTypeComboBox_SelectionChanged"/>
-        <TextBox x:Name="identityNumberTextBox" Header="Client ID /student card ID" Margin="10,225,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <TextBox x:Name="cityCardNumberTextBox" Header="City card number (longer one, right bottom corner)" Margin="10,300,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox x:Name="identityNumberTextBox" Header="Client ID /student card ID" Margin="10,225,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="identityNumberTextBox_TextChanged"/>
+        <TextBox x:Name="cityCardNumberTextBox" Header="City card number (longer one, right bottom corner)" Margin="10,300,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="cityCardNumberTextBox_TextChanged"/>
+        <TextBox x:Name="peselNumberTextBox" Header="PESEL" Margin="11,383,9,0" IsEnabled="False" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="peselNumberTextBox_TextChanged"/>
 
-        
-        
+
+
     </Grid>
 
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" IsOpen="true">
-            <AppBarButton Label="Check tickets" Click="AppBarButton_Click">
+            <AppBarButton Label="Check tickets" Click="CheckAppBarButton_Click">
                 <AppBarButton.Icon>
                     <SymbolIcon Symbol="Accept" ToolTipService.ToolTip="Check tickets"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton Label="Settings" Click="SettingsAppBarButton_Click">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Setting" ToolTipService.ToolTip="Check tickets"/>
                 </AppBarButton.Icon>
             </AppBarButton>
         </CommandBar>

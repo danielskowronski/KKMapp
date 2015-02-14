@@ -100,7 +100,7 @@ namespace KKMapp
                     throw new Exception("Failed to create initial page");
                 }
             }
-
+            
             // Ensure the current window is active
             Window.Current.Activate();
         }
