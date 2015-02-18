@@ -16,14 +16,17 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)CardType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ClientInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)KKMinfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)TicketInfo.xaml.cs">
-      <DependentUpon>TicketInfo.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)TicketInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TicketInfoPage.xaml.cs">
+      <DependentUpon>TicketInfoPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -35,7 +38,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)TicketInfo.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)TicketInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

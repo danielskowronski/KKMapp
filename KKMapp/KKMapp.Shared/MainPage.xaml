@@ -15,6 +15,7 @@
         <TextBox x:Name="identityNumberTextBox" Header="Client ID /student card ID" Margin="10,225,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="identityNumberTextBox_TextChanged"/>
         <TextBox x:Name="cityCardNumberTextBox" Header="City card number (longer one, right bottom corner)" Margin="10,300,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="cityCardNumberTextBox_TextChanged"/>
         <TextBox x:Name="peselNumberTextBox" Header="PESEL" Margin="11,383,9,0" IsEnabled="False" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="peselNumberTextBox_TextChanged"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="164,480,0,0" VerticalAlignment="Top" Click="Button_Click"/>
 
 
 

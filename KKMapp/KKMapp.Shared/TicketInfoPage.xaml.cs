@@ -20,9 +20,9 @@ namespace KKMapp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class TicketInfo : Page
+    public sealed partial class TicketInfoPage : Page
     {
-        public TicketInfo()
+        public TicketInfoPage()
         {
             this.InitializeComponent();
         }

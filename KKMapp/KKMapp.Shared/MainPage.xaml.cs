@@ -124,5 +124,11 @@ namespace KKMapp
             MessageDialog dialog = new MessageDialog(text);
             dialog.ShowAsync();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TicketInfoAgregator tia = new TicketInfoAgregator(); ClientInfo ci = new ClientInfo(); DateTime dt = new DateTime();
+            tia.getTicketInfoFromMpk(ci, dt);
+        }
 	}
 }
