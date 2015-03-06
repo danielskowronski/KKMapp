@@ -12,13 +12,13 @@
 
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="KKM app - tickets info" VerticalAlignment="Top" FontSize="36"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,126,0,0" TextWrapping="Wrap" Text="Ticket type" VerticalAlignment="Top" FontSize="18" TextAlignment="Right"/>
-        <TextBlock HorizontalAlignment="Left" Margin="121,122,0,0" TextWrapping="Wrap" x:Name="ticketTypeTextBlock" Text="Ulgowy | wszystkie dni tygodnia" VerticalAlignment="Top" FontSize="22" Width="442"/>
+        <TextBlock HorizontalAlignment="Left" Margin="121,122,0,0" TextWrapping="Wrap" x:Name="ticketTypeTextBlock" Text="No data yet" VerticalAlignment="Top" FontSize="22" Width="442"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,157,0,0" TextWrapping="Wrap" Text="Valid since" VerticalAlignment="Top" FontSize="18" Width="86" TextAlignment="Right"/>
-        <TextBlock HorizontalAlignment="Left" Margin="121,153,0,0" TextWrapping="Wrap" x:Name="ticketValidSinceTextBlock" Text="2015-01-07" VerticalAlignment="Top" FontSize="22" Width="442"/>
+        <TextBlock HorizontalAlignment="Left" Margin="121,153,0,0" TextWrapping="Wrap" x:Name="ticketValidSinceTextBlock" Text="No data yet" VerticalAlignment="Top" FontSize="22" Width="442"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,188,0,0" TextWrapping="Wrap" Text="Expires" VerticalAlignment="Top" FontSize="18" Width="86" TextAlignment="Right"/>
-        <TextBlock HorizontalAlignment="Left" Margin="121,184,0,0" TextWrapping="Wrap" x:Name="ticketExpiresTextBlock" Text="2015-02-06 (11 days left)" VerticalAlignment="Top" FontSize="22" Width="442"/>
+        <TextBlock HorizontalAlignment="Left" Margin="121,184,0,0" TextWrapping="Wrap" x:Name="ticketExpiresTextBlock" Text="No data yet" VerticalAlignment="Top" FontSize="22" Width="442"/>
         <TextBlock HorizontalAlignment="Left" Margin="8,219,0,0" TextWrapping="Wrap" Text="Lines" VerticalAlignment="Top" FontSize="18" Width="88" TextAlignment="Right"/>
-        <TextBlock HorizontalAlignment="Left" Margin="119,215,0,0" TextWrapping="Wrap" x:Name="ticketLinesTextBlock" Text="Miejskie: wzystkie linie | Strefowe: -" VerticalAlignment="Top" FontSize="22" Width="444"/>
+        <TextBlock HorizontalAlignment="Left" Margin="119,215,0,0" TextWrapping="Wrap" x:Name="ticketLinesTextBlock" Text="No data yet" VerticalAlignment="Top" FontSize="22" Width="444"/>
 
 
 

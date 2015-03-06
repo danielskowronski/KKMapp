@@ -27,17 +27,12 @@ namespace KKMapp
             loadCardTypes();
 
             Object val;
+            val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"];
+            if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"] = (new ClientInfo()).Serialize();
+            
             val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["alternativeDataSource"];
             if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["alternativeDataSource"]=false;
-            val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["selectedCardTypeIdx"];
-            if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["selectedCardTypeIdx"] = 0; //trick
-            val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedClientID"];
-            if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedClientID"] = "";
-            val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedCardNumber"];
-            if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedCardNumber"] = "";
-            val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedPesel"];
-            if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedPesel"] = "";
-
+            
             //timeout becouse UI may not be loaded yet
             var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
             timer.Tick += (sender, args) => { timer.Stop(); setUiElements(); };
@@ -46,30 +41,38 @@ namespace KKMapp
 		}
         private void setUiElements()
         {
-            cardTypeComboBox.SelectedIndex = (int)(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["selectedCardTypeIdx"]);
-            identityNumberTextBox.Text = (string)(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedClientID"]);
-            cityCardNumberTextBox.Text = (string)(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedCardNumber"]);
-            peselNumberTextBox.Text = (string)(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedPesel"]);
+            ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
+            cardTypeComboBox.SelectedIndex = ci.cardTypePosition;
+            identityNumberTextBox.Text = ci.clientID;
+            cityCardNumberTextBox.Text = ci.cardID;
+            peselNumberTextBox.Text = ci.pesel;
+
 
             if ((bool)(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["alternativeDataSource"]) == false)
                 peselNumberTextBox.IsEnabled = false;
-            else if ((int)(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["selectedCardTypeIdx"]) != 0)
+            else if (ci.cardTypePosition != 0)
                     peselNumberTextBox.IsEnabled = true;
         }
 
         private void CheckAppBarButton_Click(object sender, RoutedEventArgs e)
         {
+            TicketInfoAgregator tia = new TicketInfoAgregator(); 
+            ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
+            DateTime dt = targetDatePicker.Date.LocalDateTime;
+
             //check ticket logic
             if ((bool)(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["alternativeDataSource"])==false)
             {
                 //mpk.krakow.pl
+                tia.getTicketInfoFromMpk(ci, dt);
             }
             else
             {
                 //ebilet.kkm.krakow.pl
+                tia.getTicketInfoFromMpk(ci, dt); //fixme
             }
 
-            Frame.Navigate(typeof(TicketInfo));
+            Frame.Navigate(typeof(TicketInfoPage));
         }
 
         private void SettingsAppBarButton_Click(object sender, RoutedEventArgs e)
@@ -82,14 +85,20 @@ namespace KKMapp
             if (identityNumberTextBox.Text.Length > 9) showWarningBox("Client ID too long");
             if ((((CardType)(cardTypeComboBox.SelectedItem)).getType() != "0") && identityNumberTextBox.Text.Length > 7) showWarningBox("Student card ID too long");
 
-            Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedClientID"] = identityNumberTextBox.Text;
+            //Cannot modify the result of an unboxing conversion
+            ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
+            ci.clientID = identityNumberTextBox.Text;
+            Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"] = ci.Serialize();
         }
 
         private void cityCardNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (cityCardNumberTextBox.Text.Length > 10) showWarningBox("City Card ID too long");
 
-            Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedCardNumber"] = cityCardNumberTextBox.Text;
+            //Cannot modify the result of an unboxing conversion
+            ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
+            ci.cardID = cityCardNumberTextBox.Text;
+            Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"] = ci.Serialize();
         }
       
 
@@ -97,7 +106,10 @@ namespace KKMapp
         {
             if (peselNumberTextBox.Text.Length > 11) showWarningBox("PESEL too long");
 
-            Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedPesel"] = peselNumberTextBox.Text;
+            //Cannot modify the result of an unboxing conversion
+            ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
+            ci.pesel = peselNumberTextBox.Text;
+            Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"] = ci.Serialize();
         }
         private void cardTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -115,8 +127,11 @@ namespace KKMapp
                 cityCardNumberTextBox.IsEnabled = true; 
                 peselNumberTextBox.IsEnabled = false;
             }
-            
-            Windows.Storage.ApplicationData.Current.RoamingSettings.Values["selectedCardTypeIdx"] = (cardTypeComboBox.SelectedIndex);
+
+            //Cannot modify the result of an unboxing conversion
+            ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
+            ci.cardTypePosition = (cardTypeComboBox.SelectedIndex);
+            Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"] = ci.Serialize();
         }
 
         private void showWarningBox(string text)
@@ -127,8 +142,7 @@ namespace KKMapp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TicketInfoAgregator tia = new TicketInfoAgregator(); ClientInfo ci = new ClientInfo(); DateTime dt = new DateTime();
-            tia.getTicketInfoFromMpk(ci, dt);
+           
         }
 	}
 }

@@ -25,7 +25,18 @@ namespace KKMapp
         public TicketInfoPage()
         {
             this.InitializeComponent();
+            TicketInfoAgregator.LoadedEvent += upd;
         }
+
+        private void upd(object sender, TicketInfo ti)
+        {
+            int a = 0;
+            ticketTypeTextBlock.Text = ti.getTicketDescr();
+            ticketValidSinceTextBlock.Text = ti.getTicketValidSince();
+            ticketExpiresTextBlock.Text = ti.getTicketExpirationDescr();
+            ticketLinesTextBlock.Text = ti.getLinesValid();
+        }
+
 
         private void BackAppBarButtonBack_Click(object sender, RoutedEventArgs e)
         {
@@ -36,5 +47,6 @@ namespace KKMapp
         {
 
         }
+
     }
 }

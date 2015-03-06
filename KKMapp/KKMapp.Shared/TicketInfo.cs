@@ -61,19 +61,23 @@ namespace KKMapp
         private string cityLinesValid;
         private string suburbanLinesValid;
 
+        public string getLinesValid()
+        {
+            return "City: " + cityLinesValid + " | Suburban: " + suburbanLinesValid;
+        }
         public string getTicketDescr()
         {
-            return ticketTypeDescr;
+            if (ticketTypeDescr != null) return ticketTypeDescr; else return "No data";
         }
 
         public string getTicketValidSince()
         {
-            return validSince.ToString();
+            if (validSince.ToString() != "1/1/0001 12:00:00 AM") return validSince.ToString(); else return "No data";
         }
 
         public string getTicketExpirationDate()
         {
-            return expiresAt.ToString();
+            if (expiresAt.ToString() != "1/1/0001 12:00:00 AM") return expiresAt.ToString(); else return "No data";
         }
         public int getTicketDaysLeft()
         {
@@ -82,12 +86,16 @@ namespace KKMapp
         }
         public string getTicketExpirationDescr()
         {
-            return getTicketExpirationDate() + " ("+ (
-                getTicketDaysLeft()>=0 
-                ? getTicketDaysLeft() + "days left" 
-                : "expired since " + (-getTicketDaysLeft()) + "days"
-            ) + ")";
+            if (getTicketExpirationDate() != "No data")
+                return getTicketExpirationDate() + " (" + (
+                    getTicketDaysLeft() >= 0
+                    ? getTicketDaysLeft() + "days left"
+                    : "expired since " + (-getTicketDaysLeft()) + "days"
+                ) + ")";
+            else
+                return "No data";
         }
+
     }
     class TicketInfoAgregator
     {
@@ -96,10 +104,10 @@ namespace KKMapp
         public void getTicketInfoFromMpk(ClientInfo ci, DateTime date)
         {
             string url = "http://www.mpk.krakow.pl/pl/sprawdz-waznosc-biletu/index,1.html?" +
-                "cityCardType=" + "22" +//!
-                "&dateValidity=" + "2011-02-17" +//!
-                "&identityNumber=" + "********" +//!
-                "&cityCardNumber=" + "*********";//!
+                "cityCardType=" + "22"+//ci.cardTypeNum +//fixme
+                "&dateValidity=" + date.ToString("yyyy-MM-dd") +
+                "&identityNumber=" + ci.clientID +
+                "&cityCardNumber=" + ci.cardID;
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.ContentType = "text/plain; charset=utf-8";
@@ -107,6 +115,11 @@ namespace KKMapp
 
             httpWebRequest.BeginGetResponse(getTicketInfoFromMpkCallback, httpWebRequest);
         }
+
+        public delegate void LoadedEventHandler(object sender, TicketInfo ti);
+        public static event LoadedEventHandler LoadedEvent;
+
+       
         void getTicketInfoFromMpkCallback(IAsyncResult result)
         {
             HttpWebRequest request = result.AsyncState as HttpWebRequest;
@@ -120,26 +133,36 @@ namespace KKMapp
                     string outraw = sr.ReadToEnd();
 
                     if (outraw.IndexOf("Nie znaleziono") != -1) ti = new TicketInfo(null);
-
-                    outraw = outraw.Substring(outraw.IndexOf("<div class=\"kkm-card\">"));
-                    outraw = outraw.Substring(0,outraw.IndexOf("<!-- Index:End -->"));
-                    /*outraw = outraw.Substring(outraw.IndexOf("<br />")+6);
-                    outraw = outraw.Substring(outraw.IndexOf("<br />")+6);
-                    outraw = outraw.Substring(5);*/
-                    outraw = outraw.Substring(outraw.IndexOf("<div>Rodzaj"));
-                    if (outraw.IndexOf("<div style=",10) != -1)
+                    else
                     {
-                        outraw = outraw.Substring(0, outraw.IndexOf("<div style=",10));
-                    }
-                    ti = new TicketInfo(outraw);
 
-                    
-                    
+                        outraw = outraw.Substring(outraw.IndexOf("<div class=\"kkm-card\">"));
+                        outraw = outraw.Substring(0, outraw.IndexOf("<!-- Index:End -->"));
+                        /*outraw = outraw.Substring(outraw.IndexOf("<br />")+6);
+                        outraw = outraw.Substring(outraw.IndexOf("<br />")+6);
+                        outraw = outraw.Substring(5);*/
+                        outraw = outraw.Substring(outraw.IndexOf("<div>Rodzaj"));
+                        if (outraw.IndexOf("<div style=", 10) != -1)
+                        {
+                            outraw = outraw.Substring(0, outraw.IndexOf("<div style=", 10));
+                        }
+
+                        ti = new TicketInfo(outraw);
+                    }
                 }
                 catch (WebException e)
                 {
                     ti = new TicketInfo(null);
-                    return;
+                }
+                finally
+                {
+                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                        Windows.UI.Core.CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            LoadedEvent.Invoke(this, ti);
+                        }
+                     );
                 }
             }
         }
