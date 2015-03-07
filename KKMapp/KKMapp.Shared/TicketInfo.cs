@@ -63,7 +63,7 @@ namespace KKMapp
 
         public string getLinesValid()
         {
-            return "City: " + cityLinesValid + " | Suburban: " + suburbanLinesValid;
+            return "City: " + (String.IsNullOrEmpty(cityLinesValid) ? "-" : cityLinesValid) + " | Suburban: " + (String.IsNullOrEmpty(suburbanLinesValid) ? "-" : suburbanLinesValid);
         }
         public string getTicketDescr()
         {
@@ -104,7 +104,7 @@ namespace KKMapp
         public void getTicketInfoFromMpk(ClientInfo ci, DateTime date)
         {
             string url = "http://www.mpk.krakow.pl/pl/sprawdz-waznosc-biletu/index,1.html?" +
-                "cityCardType=" + "22"+//ci.cardTypeNum +//fixme
+                "cityCardType=" +  ci.card.id +//fixme
                 "&dateValidity=" + date.ToString("yyyy-MM-dd") +
                 "&identityNumber=" + ci.clientID +
                 "&cityCardNumber=" + ci.cardID;

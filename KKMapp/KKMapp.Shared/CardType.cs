@@ -20,17 +20,18 @@ using Windows.UI.Xaml.Navigation;
 
 namespace KKMapp
 {
-    class CardType
+    public class CardType
     {
-        private string description, id;
-        public override string ToString() { return description; }
-        public string getType() { return id;  }
-        public CardType(string description, string id) { this.description = description; this.id = id; }
+        public string descr { get; private set; }
+        public string id { get; private set; }
+        public override string ToString() { return descr; }
+        public CardType(string description, string id) { this.descr = description; this.id = id; }
 
     }
 
     public sealed partial class MainPage : Page
     {
+
         public async void loadCardTypes()
         {
             cardTypeComboBox.SelectionChanged -= cardTypeComboBox_SelectionChanged;
@@ -45,6 +46,7 @@ namespace KKMapp
                     string[] tokens = line.Split(';');
                     CardType tmp = new CardType(tokens[0],tokens[1]);
                     cardTypeComboBox.Items.Add(tmp);
+                    App.CardTypeList.Add(tmp);
                 }
             }
             cardTypeComboBox.SelectionChanged += cardTypeComboBox_SelectionChanged;

@@ -6,8 +6,7 @@ namespace KKMapp
 {
     class ClientInfo
     {
-        public string cardType="";
-        public string cardTypeNum = "0";//temporal hack - will be replaced by CardType instance
+        public CardType card = new CardType("Karta KKM", "0");
         public int cardTypePosition=0; //temporal hack
         public string clientID="";
         public string cardID="";
@@ -15,13 +14,12 @@ namespace KKMapp
 
         public string Serialize()
         {
-            return cardType + "|" + cardTypeNum + "|" +cardTypePosition.ToString() + "|" + clientID + "|" + cardID + "|" + pesel;
+            return card.descr + "|" + card.id + "|" +cardTypePosition.ToString() + "|" + clientID + "|" + cardID + "|" + pesel;
         }
         public ClientInfo(string serializedObject)
         {
             string[] fields = serializedObject.Split('|'); int i = 0;
-            cardType = fields[i++];
-            cardTypeNum = fields[i++];
+            card = new CardType(fields[i++], fields[i++]);
             cardTypePosition = Int32.Parse(fields[i++]);
             clientID = fields[i++];
             cardID = fields[i++];

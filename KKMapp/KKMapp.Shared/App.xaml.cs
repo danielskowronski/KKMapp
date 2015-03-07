@@ -133,5 +133,7 @@ namespace KKMapp
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        public static List<CardType> CardTypeList = new List<CardType>();
     }
 }

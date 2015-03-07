@@ -83,7 +83,7 @@ namespace KKMapp
         private void identityNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (identityNumberTextBox.Text.Length > 9) showWarningBox("Client ID too long");
-            if ((((CardType)(cardTypeComboBox.SelectedItem)).getType() != "0") && identityNumberTextBox.Text.Length > 7) showWarningBox("Student card ID too long");
+            if ((((CardType)(cardTypeComboBox.SelectedItem)).id != "0") && identityNumberTextBox.Text.Length > 7) showWarningBox("Student card ID too long");
 
             //Cannot modify the result of an unboxing conversion
             ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
@@ -114,7 +114,7 @@ namespace KKMapp
         private void cardTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CardType sel = (CardType)(cardTypeComboBox.SelectedItem);
-            if (sel.getType() != "0")
+            if (sel.id != "0")
             {
                 cityCardNumberTextBox.IsEnabled = false; 
                 if ((bool)(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["alternativeDataSource"]) == false)
@@ -131,6 +131,7 @@ namespace KKMapp
             //Cannot modify the result of an unboxing conversion
             ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
             ci.cardTypePosition = (cardTypeComboBox.SelectedIndex);
+            ci.card = sel;
             Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"] = ci.Serialize();
         }
 
