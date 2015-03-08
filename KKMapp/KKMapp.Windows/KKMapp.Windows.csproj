@@ -115,7 +115,31 @@
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-140.png" />
+    <Content Include="Assets\SplashScreen.scale-180.png" />
+    <Content Include="Assets\Square150.scale-100.png" />
+    <Content Include="Assets\Square150.scale-140.png" />
+    <Content Include="Assets\Square150.scale-180.png" />
+    <Content Include="Assets\Square150.scale-80.png" />
+    <Content Include="Assets\Square30.scale-100.png" />
+    <Content Include="Assets\Square30.scale-140.png" />
+    <Content Include="Assets\Square30.scale-180.png" />
+    <Content Include="Assets\Square30.scale-80.png" />
+    <Content Include="Assets\Square310.scale-100.png" />
+    <Content Include="Assets\Square310.scale-140.png" />
+    <Content Include="Assets\Square310.scale-180.png" />
+    <Content Include="Assets\Square310.scale-80.png" />
+    <Content Include="Assets\Square70.scale-100.png" />
+    <Content Include="Assets\Square70.scale-140.png" />
+    <Content Include="Assets\Square70.scale-180.png" />
+    <Content Include="Assets\Square70.scale-80.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\Storelogo.scale-140.png" />
+    <Content Include="Assets\Storelogo.scale-180.png" />
+    <Content Include="Assets\WideLogo150.scale-100.png" />
+    <Content Include="Assets\WideLogo150.scale-140.png" />
+    <Content Include="Assets\WideLogo150.scale-180.png" />
+    <Content Include="Assets\WideLogo150.scale-80.png" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

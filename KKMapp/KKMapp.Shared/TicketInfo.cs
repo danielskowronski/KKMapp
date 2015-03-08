@@ -63,21 +63,21 @@ namespace KKMapp
 
         public string getLinesValid()
         {
-            return "City: " + (String.IsNullOrEmpty(cityLinesValid) ? "-" : cityLinesValid) + " | Suburban: " + (String.IsNullOrEmpty(suburbanLinesValid) ? "-" : suburbanLinesValid);
+            return App.i18n.GetString("City") + ": " + (String.IsNullOrEmpty(cityLinesValid) ? "-" : cityLinesValid) + "\n" + App.i18n.GetString("Suburban") + ": " + (String.IsNullOrEmpty(suburbanLinesValid) ? "-" : suburbanLinesValid);
         }
         public string getTicketDescr()
         {
-            if (ticketTypeDescr != null) return ticketTypeDescr; else return "No data";
+            if (ticketTypeDescr != null) return ticketTypeDescr; else return App.i18n.GetString("NoData");
         }
 
         public string getTicketValidSince()
         {
-            if (validSince.ToString() != "1/1/0001 12:00:00 AM") return validSince.ToString(); else return "No data";
+            if (validSince.ToString("yyyy-MM-dd") != "0001-01-01") return validSince.ToString("yyyy-MM-dd"); else return App.i18n.GetString("NoData");
         }
 
         public string getTicketExpirationDate()
         {
-            if (expiresAt.ToString() != "1/1/0001 12:00:00 AM") return expiresAt.ToString(); else return "No data";
+            if (expiresAt.ToString("yyyy-MM-dd") != "0001-01-01") return expiresAt.ToString("yyyy-MM-dd"); else return App.i18n.GetString("NoData");
         }
         public int getTicketDaysLeft()
         {
@@ -86,14 +86,14 @@ namespace KKMapp
         }
         public string getTicketExpirationDescr()
         {
-            if (getTicketExpirationDate() != "No data")
+            if (getTicketExpirationDate() != App.i18n.GetString("NoData"))
                 return getTicketExpirationDate() + " (" + (
                     getTicketDaysLeft() >= 0
-                    ? getTicketDaysLeft() + "days left"
-                    : "expired since " + (-getTicketDaysLeft()) + "days"
+                    ? getTicketDaysLeft() + " " + App.i18n.GetString("DaysLeft")
+                    : App.i18n.GetString("ExpiredSince") + " " + (-getTicketDaysLeft()) + App.i18n.GetString("Days")
                 ) + ")";
             else
-                return "No data";
+                return App.i18n.GetString("NoData");
         }
 
     }
@@ -104,13 +104,13 @@ namespace KKMapp
         public void getTicketInfoFromMpk(ClientInfo ci, DateTime date)
         {
             string url = "http://www.mpk.krakow.pl/pl/sprawdz-waznosc-biletu/index,1.html?" +
-                "cityCardType=" +  ci.card.id +//fixme
+                "cityCardType=" +  ci.card.id +
                 "&dateValidity=" + date.ToString("yyyy-MM-dd") +
                 "&identityNumber=" + ci.clientID +
                 "&cityCardNumber=" + ci.cardID;
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.ContentType = "text/plain; charset=utf-8";
+            //httpWebRequest.ContentType = "text/plain; charset=utf-8";
             httpWebRequest.Method = "GET";
 
             httpWebRequest.BeginGetResponse(getTicketInfoFromMpkCallback, httpWebRequest);
@@ -135,17 +135,11 @@ namespace KKMapp
                     if (outraw.IndexOf("Nie znaleziono") != -1) ti = new TicketInfo(null);
                     else
                     {
-
                         outraw = outraw.Substring(outraw.IndexOf("<div class=\"kkm-card\">"));
                         outraw = outraw.Substring(0, outraw.IndexOf("<!-- Index:End -->"));
-                        /*outraw = outraw.Substring(outraw.IndexOf("<br />")+6);
-                        outraw = outraw.Substring(outraw.IndexOf("<br />")+6);
-                        outraw = outraw.Substring(5);*/
                         outraw = outraw.Substring(outraw.IndexOf("<div>Rodzaj"));
                         if (outraw.IndexOf("<div style=", 10) != -1)
-                        {
                             outraw = outraw.Substring(0, outraw.IndexOf("<div style=", 10));
-                        }
 
                         ti = new TicketInfo(outraw);
                     }

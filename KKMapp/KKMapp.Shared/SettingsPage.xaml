@@ -9,8 +9,8 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="KKM app - settings" VerticalAlignment="Top" FontSize="36"/>
-        <ToggleSwitch IsOn="False" x:Name="toggleSwitchDataSource" Header="Use e-ticket database only" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Toggled="ToggleSwitch_Toggled"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" x:Uid="settingsPageTitle" TextWrapping="Wrap" Text="KKM app - settings" VerticalAlignment="Top" FontSize="36"/>
+        <ToggleSwitch IsOn="False" x:Name="toggleSwitchDataSource" x:Uid="toggleSwitchDataSource" Header="Use e-ticket database only" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Toggled="ToggleSwitch_Toggled"/>
 
 
 
@@ -18,7 +18,7 @@
 
     <Page.BottomAppBar>
         <CommandBar IsSticky="True" IsOpen="true">
-            <AppBarButton Label="Back" Click="BackAppBarButtonBack_Click">
+            <AppBarButton x:Uid="backAppbarButton" Label="Back" Click="BackAppBarButtonBack_Click">
                 <AppBarButton.Icon>
                     <SymbolIcon Symbol="Back" ToolTipService.ToolTip="Check tickets"/>
                 </AppBarButton.Icon>

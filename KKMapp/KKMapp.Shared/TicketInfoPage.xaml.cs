@@ -48,5 +48,13 @@ namespace KKMapp
 
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ticketExpiresTextBlock.Text = App.i18n.GetString("NoDataYet");
+            ticketLinesTextBlock.Text = App.i18n.GetString("NoDataYet");
+            ticketTypeTextBlock.Text = App.i18n.GetString("NoDataYet");
+            ticketValidSinceTextBlock.Text = App.i18n.GetString("NoDataYet");
+        }
+
     }
 }

@@ -29,20 +29,9 @@ namespace KKMapp
 
         public class UserDataInvalidException : Exception
         {
-            public UserDataInvalidException(string field) : base(field+" data is invalid") { }
+            public UserDataInvalidException(string field) : base(field+" "+App.i18n.GetString("DataIsInvalid")) { }
         }
 
-        /*
-          Object val;
-            val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["selectedCardTypeIdx"];
-            if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["selectedCardTypeIdx"] = 0; //trick
-            val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedClientID"];
-            if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedClientID"] = "";
-            val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedCardNumber"];
-            if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedCardNumber"] = "";
-            val = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedPesel"];
-            if (val == null) Windows.Storage.ApplicationData.Current.RoamingSettings.Values["providedPesel"] = ""; 
-         */
     }
     
 }

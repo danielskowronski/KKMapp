@@ -82,8 +82,8 @@ namespace KKMapp
 
         private void identityNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (identityNumberTextBox.Text.Length > 9) showWarningBox("Client ID too long");
-            if ((((CardType)(cardTypeComboBox.SelectedItem)).id != "0") && identityNumberTextBox.Text.Length > 7) showWarningBox("Student card ID too long");
+            if (identityNumberTextBox.Text.Length > 9) showWarningBox(App.i18n.GetString("ClientIDTooLong"));
+            if ((((CardType)(cardTypeComboBox.SelectedItem)).id != "0") && identityNumberTextBox.Text.Length > 7) showWarningBox(App.i18n.GetString("StudentIDTooLong"));
 
             //Cannot modify the result of an unboxing conversion
             ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
@@ -93,7 +93,7 @@ namespace KKMapp
 
         private void cityCardNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (cityCardNumberTextBox.Text.Length > 10) showWarningBox("City Card ID too long");
+            if (cityCardNumberTextBox.Text.Length > 10) showWarningBox(App.i18n.GetString("CityCardIDTooLong"));
 
             //Cannot modify the result of an unboxing conversion
             ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
@@ -104,7 +104,7 @@ namespace KKMapp
 
         private void peselNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (peselNumberTextBox.Text.Length > 11) showWarningBox("PESEL too long");
+            if (peselNumberTextBox.Text.Length > 11) showWarningBox(App.i18n.GetString("PeselTooLong"));
 
             //Cannot modify the result of an unboxing conversion
             ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
