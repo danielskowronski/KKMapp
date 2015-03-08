@@ -1,0 +1,32 @@
+EN
+
+KKMapp is unofficial app for checking active Cracov's municipal transport tickets (MPK) stored on KKM (Krakowska Karta Miejska /Cracov City Card).
+
+This is open-source app - chceck https://github.com/danielskowronski/KKMapp
+Author: Daniel Skowroński <daniel@dsinf.net>, http://dsinf.net
+
+*check active ticket on KKM
+
+This is very first release with basic functionality only - stay tuned for pinning tickets tiles to start menu, reminders and many more ;)
+
+
+---------------------------------------------------------------------------
+PL
+KKMapp to nieoficjalna aplikacja pozwalająca sprawdzić aktywne bilety w krakowskiej komunikacji miejskiej (MPK) zapisane na KKM (Krakowskiej Karcie Miejskiej).
+
+Ta aplikacja jest open source - sprawdź https://github.com/danielskowronski/KKMapp
+Autor: Daniel Skowroński <daniel@dsinf.net>, http://dsinf.net
+
+*sprawdzanie aktywnych biletów na KKM
+
+
+To jest pierwsze wydanie jedynie z podstawowymi funkcjami - poczekaj chwilę na przypinanie kafelków z biletami, przypominacze o kończących się biletach i wiele innych ;)
+
+
+
+
+
+
+-------------------------------
+tags:
+KKM, MPK, Kraków, Cracow, karta miejska, city card

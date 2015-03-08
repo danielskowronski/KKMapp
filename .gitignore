@@ -231,3 +231,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+KKMapp/KKMapp.WindowsPhone/Package.StoreAssociation.xml
+KKMapp/KKMapp.Windows/Package.StoreAssociation.xml
+KKMapp/KKMapp.WindowsPhone/BundleArtifacts/neutral.txt
+KKMapp/KKMapp.Windows/BundleArtifacts/neutral.txt

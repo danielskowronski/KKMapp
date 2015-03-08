@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="ddb2763d-8c3a-45c4-929e-d8ae225d5c1b" Publisher="CN=Daniel" Version="0.2.0.0" />
-  <mp:PhoneIdentity PhoneProductId="ddb2763d-8c3a-45c4-929e-d8ae225d5c1b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="39172DanielSkowroski.KKMapp" Publisher="CN=8505997D-3169-40E1-A217-1EFAD5482726" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="38eddaee-2674-4a37-8f71-e5a30a24dbf1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>KKMapp.WindowsPhone</DisplayName>
+    <DisplayName>KKMapp</DisplayName>
     <PublisherDisplayName>Daniel Skowroński</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

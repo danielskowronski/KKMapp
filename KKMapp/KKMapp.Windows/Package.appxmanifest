@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="bbb986f7-c745-49cf-b3dc-226a29e9a872" Publisher="CN=Daniel" Version="0.2.0.0" />
+  <Identity Name="39172DanielSkowroski.KKMapp" Publisher="CN=8505997D-3169-40E1-A217-1EFAD5482726" Version="1.1.0.8" />
   <Properties>
-    <DisplayName>KKMapp.Windows</DisplayName>
+    <DisplayName>KKMapp</DisplayName>
     <PublisherDisplayName>Daniel Skowroński</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
