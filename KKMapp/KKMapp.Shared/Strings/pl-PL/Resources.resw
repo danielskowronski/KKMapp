@@ -203,4 +203,7 @@
   <data name="validSinceLabel.Text" xml:space="preserve">
     <value>Ważny od</value>
   </data>
+  <data name="expires" xml:space="preserve">
+    <value>Wygasa dnia</value>
+  </data>
 </root>

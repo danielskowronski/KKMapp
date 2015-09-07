@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KKMapp", "KKMapp", "{2DB12950-925E-4C7E-899C-52DE9AF15EB4}"
 EndProject
@@ -11,10 +11,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKMapp.Windows", "KKMapp\KK
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KKMapp.WindowsPhone", "KKMapp\KKMapp.WindowsPhone\KKMapp.WindowsPhone.csproj", "{D4E81FB9-86E5-4013-B288-C75B6D7EC162}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketTileAgent", "TicketTileAgent\TicketTileAgent.csproj", "{AD944089-407C-497F-B831-5064A3FB182E}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		KKMapp\KKMapp.Shared\KKMapp.Shared.projitems*{e5b30b48-f91e-458c-8825-92d654fe7450}*SharedItemsImports = 4
 		KKMapp\KKMapp.Shared\KKMapp.Shared.projitems*{d4e81fb9-86e5-4013-b288-c75b6d7ec162}*SharedItemsImports = 4
+		KKMapp\KKMapp.Shared\KKMapp.Shared.projitems*{ad944089-407c-497f-b831-5064a3fb182e}*SharedItemsImports = 4
 		KKMapp\KKMapp.Shared\KKMapp.Shared.projitems*{f069db33-00aa-434a-827a-e563e8f6d718}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +75,22 @@ Global
 		{D4E81FB9-86E5-4013-B288-C75B6D7EC162}.Release|x86.ActiveCfg = Release|x86
 		{D4E81FB9-86E5-4013-B288-C75B6D7EC162}.Release|x86.Build.0 = Release|x86
 		{D4E81FB9-86E5-4013-B288-C75B6D7EC162}.Release|x86.Deploy.0 = Release|x86
+		{AD944089-407C-497F-B831-5064A3FB182E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Debug|x64.Build.0 = Debug|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Debug|x86.Build.0 = Debug|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Release|ARM.Build.0 = Release|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Release|x64.ActiveCfg = Release|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Release|x64.Build.0 = Release|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Release|x86.ActiveCfg = Release|Any CPU
+		{AD944089-407C-497F-B831-5064A3FB182E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,5 +99,6 @@ Global
 		{F069DB33-00AA-434A-827A-E563E8F6D718} = {2DB12950-925E-4C7E-899C-52DE9AF15EB4}
 		{E5B30B48-F91E-458C-8825-92D654FE7450} = {2DB12950-925E-4C7E-899C-52DE9AF15EB4}
 		{D4E81FB9-86E5-4013-B288-C75B6D7EC162} = {2DB12950-925E-4C7E-899C-52DE9AF15EB4}
+		{AD944089-407C-497F-B831-5064A3FB182E} = {2DB12950-925E-4C7E-899C-52DE9AF15EB4}
 	EndGlobalSection
 EndGlobal

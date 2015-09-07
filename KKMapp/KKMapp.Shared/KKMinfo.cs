@@ -29,7 +29,7 @@ namespace KKMapp
 
         public class UserDataInvalidException : Exception
         {
-            public UserDataInvalidException(string field) : base(field+" "+App.i18n.GetString("DataIsInvalid")) { }
+            public UserDataInvalidException(string field) : base(field+" "+Common.i18n.GetString("DataIsInvalid")) { }
         }
 
     }

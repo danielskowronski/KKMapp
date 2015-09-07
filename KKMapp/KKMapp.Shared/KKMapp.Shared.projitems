@@ -17,6 +17,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)CardType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ClientInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)KKMinfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

@@ -20,7 +20,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace KKMapp
 {
-    public class CardType
+    public sealed class CardType
     {
         public string descr { get; private set; }
         public string id { get; private set; }
@@ -46,7 +46,7 @@ namespace KKMapp
                     string[] tokens = line.Split(';');
                     CardType tmp = new CardType(tokens[0],tokens[1]);
                     cardTypeComboBox.Items.Add(tmp);
-                    App.CardTypeList.Add(tmp);
+                    Common.CardTypeList.Add(tmp);
                 }
             }
             cardTypeComboBox.SelectionChanged += cardTypeComboBox_SelectionChanged;

@@ -35,6 +35,7 @@ namespace KKMapp
         /// </summary>
         public App()
         {
+            Common.i18n =  Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("Resources");
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
         }
@@ -104,7 +105,6 @@ namespace KKMapp
             // Ensure the current window is active
             Window.Current.Activate();
 
-            i18n = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("Resources");
         }
 
 #if WINDOWS_PHONE_APP
@@ -136,7 +136,6 @@ namespace KKMapp
             deferral.Complete();
         }
 
-        public static List<CardType> CardTypeList = new List<CardType>();
-        public static Windows.ApplicationModel.Resources.ResourceLoader i18n;
+        
     }
 }

@@ -4,6 +4,8 @@ using System.Text;
 using System.Net;
 using System.Threading.Tasks;
 using System.Globalization;
+using Windows.UI.Notifications;
+using Windows.Data.Xml.Dom;
 
 namespace KKMapp
 {
@@ -11,6 +13,8 @@ namespace KKMapp
     {
         public TicketInfo(string dataraw)
         {
+            Common.i18n = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("Resources");
+
             this.dataraw = dataraw;
             if (dataraw == null)
             {
@@ -63,21 +67,21 @@ namespace KKMapp
 
         public string getLinesValid()
         {
-            return App.i18n.GetString("City") + ": " + (String.IsNullOrEmpty(cityLinesValid) ? "-" : cityLinesValid) + "\n" + App.i18n.GetString("Suburban") + ": " + (String.IsNullOrEmpty(suburbanLinesValid) ? "-" : suburbanLinesValid);
+            return Common.i18n.GetString("City") + ": " + (String.IsNullOrEmpty(cityLinesValid) ? "-" : cityLinesValid) + "\n" + Common.i18n.GetString("Suburban") + ": " + (String.IsNullOrEmpty(suburbanLinesValid) ? "-" : suburbanLinesValid);
         }
         public string getTicketDescr()
         {
-            if (ticketTypeDescr != null) return ticketTypeDescr; else return App.i18n.GetString("NoData");
+            if (ticketTypeDescr != null) return ticketTypeDescr; else return Common.i18n.GetString("NoData");
         }
 
         public string getTicketValidSince()
         {
-            if (validSince.ToString("yyyy-MM-dd") != "0001-01-01") return validSince.ToString("yyyy-MM-dd"); else return App.i18n.GetString("NoData");
+            if (validSince.ToString("yyyy-MM-dd") != "0001-01-01") return validSince.ToString("yyyy-MM-dd"); else return Common.i18n.GetString("NoData");
         }
 
         public string getTicketExpirationDate()
         {
-            if (expiresAt.ToString("yyyy-MM-dd") != "0001-01-01") return expiresAt.ToString("yyyy-MM-dd"); else return App.i18n.GetString("NoData");
+            if (expiresAt.ToString("yyyy-MM-dd") != "0001-01-01") return expiresAt.ToString("yyyy-MM-dd"); else return Common.i18n.GetString("NoData");
         }
         public int getTicketDaysLeft()
         {
@@ -86,23 +90,26 @@ namespace KKMapp
         }
         public string getTicketExpirationDescr()
         {
-            if (getTicketExpirationDate() != App.i18n.GetString("NoData"))
+            if (getTicketExpirationDate() != Common.i18n.GetString("NoData"))
                 return getTicketExpirationDate() + " (" + (
                     getTicketDaysLeft() >= 0
-                    ? getTicketDaysLeft() + " " + App.i18n.GetString("DaysLeft")
-                    : App.i18n.GetString("ExpiredSince") + " " + (-getTicketDaysLeft()) + App.i18n.GetString("Days")
+                    ? getTicketDaysLeft() + " " + Common.i18n.GetString("DaysLeft")
+                    : Common.i18n.GetString("ExpiredSince") + " " + (-getTicketDaysLeft()) + Common.i18n.GetString("Days")
                 ) + ")";
             else
-                return App.i18n.GetString("NoData");
+                return Common.i18n.GetString("NoData");
         }
 
     }
     class TicketInfoAgregator
     {
         TicketInfo ti;
+        bool isFromBackend;
 
-        public void getTicketInfoFromMpk(ClientInfo ci, DateTime date)
+        public void getTicketInfoFromMpk(ClientInfo ci, DateTime date, bool isFromBackend=false)
         {
+            this.isFromBackend = isFromBackend;
+
             string url = "http://www.mpk.krakow.pl/pl/sprawdz-waznosc-biletu/index,1.html?" +
                 "cityCardType=" +  ci.card.id +
                 "&dateValidity=" + date.ToString("yyyy-MM-dd") +
@@ -150,13 +157,35 @@ namespace KKMapp
                 }
                 finally
                 {
-                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                        Windows.UI.Core.CoreDispatcherPriority.Normal,
-                        () =>
-                        {
-                            LoadedEvent.Invoke(this, ti);
-                        }
-                     );
+                    if (!isFromBackend)
+                    {
+                        Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                            Windows.UI.Core.CoreDispatcherPriority.Normal,
+                            () =>
+                            {
+                                LoadedEvent.Invoke(this, ti);
+                            }
+                         );
+                    }
+                    else
+                    {
+                        string data1 = "KKM: " + Common.i18n.GetString("expires");
+                        string data2 = ti.getTicketExpirationDescr();
+
+                        var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+                        updater.EnableNotificationQueue(true);
+                        updater.Clear();
+
+                        XmlDocument tileXml;
+
+                        tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWideText03);
+                        tileXml.GetElementsByTagName("text")[0].InnerText = data1 + "\n" + data2;
+                        updater.Update(new TileNotification(tileXml));
+
+                        tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileSquareText04);
+                        tileXml.GetElementsByTagName("text")[0].InnerText = data1 + "\n" + data2;
+                        updater.Update(new TileNotification(tileXml));
+                    }
                 }
             }
         }

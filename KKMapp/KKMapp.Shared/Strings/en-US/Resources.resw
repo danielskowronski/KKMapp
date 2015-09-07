@@ -203,4 +203,7 @@
   <data name="validSinceLabel.Text" xml:space="preserve">
     <value>Valid since</value>
   </data>
+  <data name="expires" xml:space="preserve">
+    <value>Expires on</value>
+  </data>
 </root>

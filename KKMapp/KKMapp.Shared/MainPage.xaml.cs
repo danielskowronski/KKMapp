@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 using Windows.UI.Popups;
 using Windows.Storage;
+using Windows.ApplicationModel.Background;
 
 namespace KKMapp
 {
@@ -38,7 +39,33 @@ namespace KKMapp
             timer.Tick += (sender, args) => { timer.Stop(); setUiElements(); };
             timer.Start();
 
-		}
+            RegisterBackgroundTask();
+        }
+
+        private async void RegisterBackgroundTask()
+        {
+            var taskName = "TicketTileUpdateTask";
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            TicketTileUpdateTask.zrob();
+
+            if (backgroundAccessStatus==BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity || backgroundAccessStatus==BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name==taskName)
+                    {
+                        return;
+                    }
+                }
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = taskName;
+                taskBuilder.TaskEntryPoint = typeof(TicketTileUpdateTask).FullName;
+                taskBuilder.SetTrigger(new TimeTrigger(360, false));
+                
+                var registration  = taskBuilder.Register();
+            }
+        }
+
         private void setUiElements()
         {
             ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
@@ -82,8 +109,8 @@ namespace KKMapp
 
         private void identityNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (identityNumberTextBox.Text.Length > 9) showWarningBox(App.i18n.GetString("ClientIDTooLong"));
-            if ((((CardType)(cardTypeComboBox.SelectedItem)).id != "0") && identityNumberTextBox.Text.Length > 7) showWarningBox(App.i18n.GetString("StudentIDTooLong"));
+            if (identityNumberTextBox.Text.Length > 9) showWarningBox(Common.i18n.GetString("ClientIDTooLong"));
+            if ((((CardType)(cardTypeComboBox.SelectedItem)).id != "0") && identityNumberTextBox.Text.Length > 7) showWarningBox(Common.i18n.GetString("StudentIDTooLong"));
 
             //Cannot modify the result of an unboxing conversion
             ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
@@ -93,7 +120,7 @@ namespace KKMapp
 
         private void cityCardNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (cityCardNumberTextBox.Text.Length > 10) showWarningBox(App.i18n.GetString("CityCardIDTooLong"));
+            if (cityCardNumberTextBox.Text.Length > 11) showWarningBox(Common.i18n.GetString("CityCardIDTooLong"));
 
             //Cannot modify the result of an unboxing conversion
             ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
@@ -104,7 +131,7 @@ namespace KKMapp
 
         private void peselNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (peselNumberTextBox.Text.Length > 11) showWarningBox(App.i18n.GetString("PeselTooLong"));
+            if (peselNumberTextBox.Text.Length > 11) showWarningBox(Common.i18n.GetString("PeselTooLong"));
 
             //Cannot modify the result of an unboxing conversion
             ClientInfo ci = new ClientInfo(Windows.Storage.ApplicationData.Current.RoamingSettings.Values["clientInfo"].ToString());
