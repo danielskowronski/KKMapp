@@ -15,11 +15,12 @@
     <FileAlignment>512</FileAlignment>
     <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>KKMapp.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>KKMapp.Windows_StoreKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
-    <PackageCertificateThumbprint>AED4CAD96EEF9BAB8CD5441B12295EF0BC3CD76F</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>BEE516F646E8B417F038AC829B8C2299A6344131</PackageCertificateThumbprint>
+    <AppxBundle>Always</AppxBundle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -115,7 +116,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Badge33.scale-100.png" />
+    <Content Include="Assets\Badge33.scale-140.png" />
+    <Content Include="Assets\Badge33.scale-180.png" />
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\BadgeLogo.scale-140.png" />
+    <Content Include="Assets\BadgeLogo.scale-180.png" />
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -145,6 +151,7 @@
     <Content Include="Assets\WideLogo150.scale-140.png" />
     <Content Include="Assets\WideLogo150.scale-180.png" />
     <Content Include="Assets\WideLogo150.scale-80.png" />
+    <None Include="KKMapp.Windows_StoreKey.pfx" />
     <None Include="KKMapp.Windows_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
